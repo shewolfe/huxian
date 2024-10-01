@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+		<script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.2.0/chroma.min.js"></script>
+
+		<script src="p5-clouds.js"></script>
+		<script src="huxian.js" defer></script>
+		<link rel="stylesheet" href="huxian.css" />
+
+		<title>A X I S &nbsp; M U N D I &nbsp;:&nbsp; 狐 仙</title>
+	</head>
+
+	<body id="huxian">
+		<audio id="audio" controls style="display: none">
+			<source src="drone.mp3" type="audio/mpeg" />
+		</audio>
+
+		<div id="button-start" class="button"></div>
+		<div id="button-sound" class="button"></div>
+
+		<div class="button" id="button-info">🦊</div>
+		<div class="button" id="button-x">✖️</div>
+
+		<div id="info">
+			AXIS MUNDI: 狐仙<br />
+			by
+			<a href="https://www.instagram.com/wolfchirp/"
+				>helen shewolfe tseng 曾敏涵</a
+			>
+			<br /><br />
+			take some time to take a breath.
+			<br /><br />
+			<i>axis mundi</i>, referring to the connection between the physical and
+			spiritual realms, is a soothing sensory digital space designed in response
+			to the overwhelming, dissociative pace of our current networked lives.
+			informed by my ancestral traditions and cosmologies, a many-tailed 狐仙
+			guides and grounds viewers through a calming audiovisual loop, bringing
+			awareness to the ebb and flow of breath, and inviting presence, pause, and
+			self-regulation.<br /><br />
+			created with javascript/html/css, with gratitude to
+			<a href="https://aframe.io/">aframe.js</a>,
+			<a href="https://p5js.org/">p5.js</a>,
+			<a href="https://gka.github.io/chroma.js/">chroma.js</a>,
+			<a href="https://freesound.org/">freesound.org</a>,
+			<a href="https://grayarea.org/">gray area's creative code immersive</a>,
+			familial & ancestral guidance, and the coyotes of ramaytush ohlone (san
+			francisco) who remind me to take my time.
+		</div>
+
+		<div id="bg-fire1"></div>
+		<div id="bg-fire2"></div>
+		<div id="bg-fire3"></div>
+		<div id="bg-glow"></div>
+
+		<a-scene
+			vr-mode-ui="enabled: false"
+			device-orientation-permission-ui="enabled: false"
+		>
+			<!-- fox -->
+			<a-entity
+				fox
+				id="fox"
+				position="0 4.5 0"
+				rotation="0 180 0"
+				scale="1.25 1.25 1.25"
+				visible="false"
+			>
+				<!-- head -->
+				<a-entity
+					head
+					id="head"
+					position="0 0 0.25"
+					animation__rotation="property: rotation; from: -10 0 0; to: 30 0 0; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 6000; enabled: false;"
+					animation__position="property: position; from: 0 0 0.25; to: 0 .25 -0.5; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 6000; enabled: false;"
+				>
+					<!-- face -->
+					<a-entity
+						geometry="primitive: sphere;"
+						scale=".6 .6 .6"
+						position="0 1.25 0"
+						material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+					></a-entity>
+
+					<!-- ears -->
+					<a-entity
+						geometry="primitive: cone;"
+						scale="0.4 1 0.2"
+						rotation="-5 -10 30"
+						position="-.5 2 0"
+						material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+					></a-entity>
+
+					<a-entity
+						geometry="primitive: cone;"
+						scale="0.4 1 0.2"
+						rotation="-5 10 -30"
+						position=".5 2 0"
+						material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+					></a-entity>
+
+					<!-- snout -->
+					<a-entity
+						geometry="primitive: cone; radiusTop: 0.2;"
+						scale="0.5 1 0.5"
+						rotation="-85 0 0"
+						position="0 1.25 -0.65"
+						material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+					></a-entity>
+
+					<!-- nose -->
+					<a-sphere
+						scale="0.11 0.11 0.11"
+						rotation="-90 0 0"
+						position="0 1.3 -1.2"
+						material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+					></a-sphere>
+				</a-entity>
+
+				<!-- neck -->
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.5 1.3s0 0.5"
+					rotation="-25 0 0"
+					position="0 0.5 0.5"
+					material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+				></a-entity>
+
+				<!-- body -->
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.7 1.7 0.7"
+					rotation="-45 0 0"
+					position="0 -.7 2"
+					material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+				></a-entity>
+
+				<!-- nine tails -->
+				<a-entity
+					ninetails
+					id="ninetails"
+					position="0 2 3.75"
+					scale="2 2 2"
+					animation__rotation="property: rotation; from: 0 0 0; to: 20 0 0; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+					animation__position="property: position; from: 0 2 3.75; to: 0 2 4.75; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+				>
+					<a-entity
+						tail-5
+						id="tail-5"
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 0"
+						position="0 0 0"
+						material="opacity: 0.5; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+					></a-entity>
+
+					<a-entity
+						tail-4
+						id="tail-4"
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 -22.5"
+						position=".7 -.1 0"
+						material="opacity: 0.5; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+						animation="property: rotation; from: 0 0 -22.5; to: 0 0 -20; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+					></a-entity>
+
+					<a-entity
+						tail-6
+						id="tail-6"
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 22.5"
+						position="-.7 -.1 0"
+						material="opacity: 0.5; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25"
+						animation="property: rotation; from: 0 0 22.5; to: 0 0 20; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+					></a-entity>
+
+					<a-entity
+						tail-3
+						id="tail-3"
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 -45"
+						position="1.25 -.5 0"
+						material="opacity: 0.5; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+						animation="property: rotation; from: 0 0 -45; to: 0 0 -40; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+					></a-entity>
+
+					<a-entity
+						tail-7
+						id="tail-7"
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 45"
+						position="-1.25 -.5 0"
+						material="opacity: 0.5; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+						animation="property: rotation; from: 0 0 45; to: 0 0 40; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+					></a-entity>
+
+					<a-entity
+						tail-2
+						id="tail-2"
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 -67.5"
+						position="1.42 -1 0"
+						material="opacity: 0.5; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+						animation="property: rotation; from: 0 0 -67.5; to: 0 0 -60; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+					></a-entity>
+
+					<a-entity
+						tail-8
+						id="tail-8"
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 67.5"
+						position="-1.42 -1 0"
+						material="opacity: 0.5; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+						animation="property: rotation; from: 0 0 67.5; to: 0 0 60; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+					></a-entity>
+
+					<a-entity
+						tail-1
+						id="tail-1"
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 -90"
+						position="1.5 -1.5 0"
+						material="opacity: 0.5; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+						animation="property: rotation; from: 0 0 -90; to: 0 0 -80; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+					></a-entity>
+
+					<a-entity
+						tail-9
+						id="tail-9"
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 90"
+						position="-1.5 -1.5 0"
+						material="opacity: 0.5; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+						animation="property: rotation; from: 0 0 90; to: 0 0 80; autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 3000; enabled: false;"
+					></a-entity>
+				</a-entity>
+
+				<!-- front legs -->
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					scale="0.2 2 0.2"
+					rotation="190 0 2.5"
+					position="0.25 -1 1"
+					material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+				></a-entity>
+
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					scale="0.2 2 0.2"
+					rotation="190 0 -2.5"
+					position="-0.25 -1 1"
+					material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+				></a-entity>
+
+				<!-- back thighs -->
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.3 1 0.5"
+					rotation="-45 0 0"
+					position="-0.5 -1.2 2.2"
+					material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+				></a-entity>
+
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.3 1 0.5"
+					rotation="-45 0 0"
+					position="0.5 -1.2 2.2"
+					material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+				></a-entity>
+
+				<!-- back legs -->
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					scale="0.15 1.45 0.2"
+					rotation="-93 0 2.5"
+					position="-0.5 -1.83 2"
+					material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+				></a-entity>
+
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					scale="0.15 1.45 0.2"
+					rotation="-93 0 -2.5"
+					position="0.5 -1.83 2"
+					material="opacity: 0.75; color: white; metalness: 0.25; emissive: blue; emissiveIntensity: 0.25;"
+				></a-entity>
+			</a-entity>
+
+			<!-- fox gold -->
+			<a-entity
+				fox-gold
+				id="fox-gold"
+				position="0 4.5 0"
+				rotation="0 180 0"
+				scale="1.25 1.25 1.25"
+				visible="true"
+			>
+				<!-- head -->
+				<a-entity head position="0 0 0.25" rotation="-10 0 0">
+					<!-- face -->
+					<a-entity
+						geometry="primitive: sphere;"
+						scale=".6 .6 .6"
+						position="0 1.25 0"
+						material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<!-- ears -->
+					<a-entity
+						geometry="primitive: cone;"
+						scale="0.4 1 0.2"
+						rotation="-5 -10 30"
+						position="-.5 2 0"
+						material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						geometry="primitive: cone;"
+						scale="0.4 1 0.2"
+						rotation="-5 10 -30"
+						position=".5 2 0"
+						material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<!-- snout -->
+					<a-entity
+						geometry="primitive: cone; radiusTop: 0.2;"
+						scale="0.5 1 0.5"
+						rotation="-85 0 0"
+						position="0 1.25 -0.65"
+						material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<!-- nose -->
+					<a-sphere
+						scale="0.11 0.11 0.11"
+						rotation="-90 0 0"
+						position="0 1.3 -1.2"
+						material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-sphere>
+				</a-entity>
+
+				<!-- neck -->
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.5 1.3s0 0.5"
+					rotation="-25 0 0"
+					position="0 0.5 0.5"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<!-- body -->
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.7 1.7 0.7"
+					rotation="-45 0 0"
+					position="0 -.7 2"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<!-- nine tails -->
+				<a-entity ninetails-gold position="0 2 3.75" scale="2 2 2">
+					<a-entity
+						goldtail-5
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 0"
+						position="0 0 0"
+						material="opacity: 0.6; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						goldtail-4
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 -22.5"
+						position=".7 -.1 0"
+						material="opacity: 0.6; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						goldtail-6
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 22.5"
+						position="-.7 -.1 0"
+						material="opacity: 0.6; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						goldtail-3
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 -45"
+						position="1.25 -.5 0"
+						material="opacity: 0.6; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						goldtail-7
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 45"
+						position="-1.25 -.5 0"
+						material="opacity: 0.6; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						goldtail-2
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 -67.5"
+						position="1.42 -1 0"
+						material="opacity: 0.6; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						goldtail-8
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 67.5"
+						position="-1.42 -1 0"
+						material="opacity: 0.6; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						goldtail-1
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 -90"
+						position="1.5 -1.5 0"
+						material="opacity: 0.6; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						goldtail-9
+						geometry="primitive: sphere;"
+						scale="0.5 1.75 0.5"
+						rotation="0 0 90"
+						position="-1.5 -1.5 0"
+						material="opacity: 0.6; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+					></a-entity>
+				</a-entity>
+
+				<!-- front legs -->
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					scale="0.2 2 0.2"
+					rotation="190 0 2.5"
+					position="0.25 -1 1"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					scale="0.2 2 0.2"
+					rotation="190 0 -2.5"
+					position="-0.25 -1 1"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<!-- back thighs -->
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.3 1 0.5"
+					rotation="-45 0 0"
+					position="-0.5 -1.2 2.2"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.3 1 0.5"
+					rotation="-45 0 0"
+					position="0.5 -1.2 2.2"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<!-- back legs -->
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					scale="0.15 1.45 0.2"
+					rotation="-93 0 2.5"
+					position="-0.5 -1.83 2"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					scale="0.15 1.45 0.2"
+					rotation="-93 0 -2.5"
+					position="0.5 -1.83 2"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+			</a-entity>
+
+			<!-- fruit -->
+			<a-entity fruit-l position="-2.25 0.33 5" scale="0.5 0.5 0.5">
+				<a-entity oranges-l id="oranges-l" visible="false">
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.5 0.5 0.5"
+						position="0 0.88 0"
+						roughness="1"
+						material="opacity: 0.8; color: coral; metalness: 0.25; emissive: orange; emissiveIntensity: 0.33;"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.5 0.5 0.5"
+						position="0.5 0 0"
+						roughness="1"
+						material="opacity: 0.8; color: coral; metalness: 0.25; emissive: orange; emissiveIntensity: 0.33;"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.5 0.5 0.5"
+						position="-0.5 0 0"
+						roughness="1"
+						material="opacity: 0.8; color: coral; metalness: 0.25; emissive: orange; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.25 0.05 0.15"
+						material="opacity: 0.8; color: teal;"
+						position="0.2 1.5 0"
+						rotation="0 0 20"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.25 0.05 0.15"
+						material="opacity: 0.8; color: teal;"
+						position="-0.2 1.5 0"
+						rotation="0 0 -20"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.3 0.05 0.15"
+						material="opacity: 0.8; color: teal;"
+						position="-0.75 0.55 0.1"
+						rotation="25 0 -15"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.3 0.05 0.15"
+						material="opacity: 0.8; color: teal;"
+						position="0.75 0.55 0.1"
+						rotation="25 0 15"
+					></a-entity>
+				</a-entity>
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.9;"
+					openEnded="true"
+					scale="1.5 0.25 1.5"
+					rotation="0 0 0"
+					position="0 -0.5 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+			</a-entity>
+
+			<a-entity fruit-r position="2.25 0.33 5" scale="0.5 0.5 0.5">
+				<a-entity oranges-r id="oranges-r" visible="false">
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.5 0.5 0.5"
+						position="0 0.88 0"
+						roughness="1"
+						material="opacity: 0.8; color: coral; metalness: 0.25; emissive: orange; emissiveIntensity: 0.33;"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.5 0.5 0.5"
+						position="0.5 0 0"
+						roughness="1"
+						material="opacity: 0.8; color: coral; metalness: 0.25; emissive: orange; emissiveIntensity: 0.33;"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.5 0.5 0.5"
+						position="-0.5 0 0"
+						roughness="1"
+						material="opacity: 0.8; color: coral; metalness: 0.25; emissive: orange; emissiveIntensity: 0.33;"
+					></a-entity>
+
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.25 0.05 0.15"
+						material="opacity: 0.8; color: teal;"
+						position="0.2 1.5 0"
+						rotation="0 0 20"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.25 0.05 0.15"
+						material="opacity: 0.8; color: teal;"
+						position="-0.2 1.5 0"
+						rotation="0 0 -20"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.3 0.05 0.15"
+						material="opacity: 0.8; color: teal;"
+						position="-0.75 0.55 0.1"
+						rotation="25 0 -15"
+					></a-entity>
+					<a-entity
+						geometry="primitive: sphere;"
+						scale="0.3 0.05 0.15"
+						material="opacity: 0.8; color: teal;"
+						position="0.75 0.55 0.1"
+						rotation="25 0 15"
+					></a-entity>
+				</a-entity>
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.9;"
+					openEnded="true"
+					scale="1.5 0.25 1.5"
+					rotation="0 0 0"
+					position="0 -0.5 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+			</a-entity>
+
+			<!-- water -->
+			<a-entity cup-l position="1 0 7" scale="0.4 0.4 0.4">
+				<a-sphere
+					theta-length="90"
+					scale="1 1 1"
+					rotation="180 0 0"
+					position="0 1 0"
+					material="side: double; opacity: 0.5; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-sphere>
+				<a-entity
+					geometry="primitive: torus; radius: 1; radiusTubular: 0.045;"
+					position="0 1 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<a-entity water-l id="water-l" visible="false">
+					<a-sphere
+						theta-length="90"
+						openEnded="false"
+						scale="0.9 0.25 0.9"
+						rotation="180 0 0"
+						position="0 0.75 0"
+						material="side: double; opacity: 0.75; color: skyblue; shader: flat;"
+					></a-sphere>
+				</a-entity>
+
+				<a-entity
+					geometry="primitive: cylinder;"
+					scale="0.5 0.15 0.5"
+					position="0 0.075 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+			</a-entity>
+
+			<a-entity cup-c position="0 0 7.25" scale="0.4 0.4 0.4">
+				<a-sphere
+					theta-length="90"
+					scale="1 1 1"
+					rotation="180 0 0"
+					position="0 1 0"
+					material="side: double; opacity: 0.5; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-sphere>
+				<a-entity
+					geometry="primitive: torus; radius: 1; radiusTubular: 0.045;"
+					position="0 1 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<a-entity water-c id="water-c" visible="false">
+					<a-sphere
+						theta-length="90"
+						openEnded="false"
+						scale="0.9 0.25 0.9"
+						rotation="180 0 0"
+						position="0 0.75 0"
+						material="side: double; opacity: 0.75; color: skyblue; shader: flat;"
+					></a-sphere>
+				</a-entity>
+
+				<a-entity
+					geometry="primitive: cylinder;"
+					scale="0.5 0.15 0.5"
+					position="0 0.075 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+			</a-entity>
+
+			<a-entity cup-r position="-1 0 7" scale="0.4 0.4 0.4">
+				<a-sphere
+					theta-length="90"
+					scale="1 1 1"
+					rotation="180 0 0"
+					position="0 1 0"
+					material="side: double; opacity: 0.5; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-sphere>
+				<a-entity
+					geometry="primitive: torus; radius: 1; radiusTubular: 0.045;"
+					position="0 1 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<a-entity water-r id="water-r" visible="false">
+					<a-sphere
+						theta-length="90"
+						openEnded="false"
+						scale="0.9 0.25 0.9"
+						rotation="180 0 0"
+						position="0 0.75 0"
+						material="side: double; opacity: 0.75; color: skyblue; shader: flat;"
+					></a-sphere>
+				</a-entity>
+
+				<a-entity
+					geometry="primitive: cylinder;"
+					scale="0.5 0.15 0.5"
+					position="0 0.075 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+			</a-entity>
+
+			<!-- candles -->
+			<a-entity candle-l position="-3.75 0.8 3.75">
+				<a-entity
+					bulb-l
+					id="bulb-l"
+					geometry="primitive: sphere;"
+					scale="0.15 0.3 0.15"
+					position="0 0.8 0"
+					material="opacity: 0.75; color: gold; metalness: 1; emissive: red; emissiveIntensity: 1;"
+					animation__emissive="autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 1000;"
+					animation__metalness="autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 1000;"
+					animation__emissiveoff="autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 1000;"
+					animation__metalnessoff="autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 1000;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: torus; radius: 0.1; radiusTubular: 0.04;"
+					position="0 0.5 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: cylinder;"
+					scale="0.1 1 0.1"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: torus; radius: 0.1; radiusTubular: 0.04;"
+					position="0 0 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.25 0.25 0.25"
+					position="0 -0.25 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: torus; radius: 0.1; radiusTubular: 0.04;"
+					position="0 -0.5 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					openEnded="true"
+					scale="0.25 0.25 0.25"
+					rotation="0 0 0"
+					position="0 -0.66 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+			</a-entity>
+
+			<a-entity candle-r position="3.75 0.8 3.75">
+				<a-entity
+					bulb-r
+					id="bulb-r"
+					geometry="primitive: sphere;"
+					scale="0.15 0.3 0.15"
+					position="0 0.8 0"
+					material="opacity: 0.75; color: gold; metalness: 1; emissive: red; emissiveIntensity: 1;"
+					animation__emissive="autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 1000;"
+					animation__metalness="autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 1000;"
+					animation__emissiveoff="autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 1000;"
+					animation__metalnessoff="autoplay: true; loop: true; easing: linear; elasticity: 0; dir: alternate; dur: 1000;"
+				></a-entity>
+
+				<a-entity
+					geometry="primitive: torus; radius: 0.1; radiusTubular: 0.04;"
+					position="0 0.5 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: cylinder;"
+					scale="0.1 1 0.1"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: torus; radius: 0.1; radiusTubular: 0.04;"
+					position="0 0 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: sphere;"
+					scale="0.25 0.25 0.25"
+					position="0 -0.25 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: torus; radius: 0.1; radiusTubular: 0.04;"
+					position="0 -0.5 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					openEnded="true"
+					scale="0.25 0.25 0.25"
+					rotation="0 0 0"
+					position="0 -0.66 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+			</a-entity>
+
+			<!-- incense -->
+
+			<a-entity incense-holder position="0 0 5">
+				<a-sphere
+					theta-length="90"
+					position="0 1.25 0"
+					scale="1 1 1"
+					rotation="180 0 0"
+					material="side: double; opacity: 0.5; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-sphere>
+				<a-entity
+					geometry="primitive: torus; radius: 1; radiusTubular: 0.03;"
+					position="0 1.25 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: torus; radius: 0.5; radiusTubular: 0.03;"
+					position="0 0.33 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: cone; radiusTop: 0.5;"
+					openEnded="true"
+					scale="0.75 0.5 0.75"
+					rotation="0 0 0"
+					position="0 0.25 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+				<a-entity
+					geometry="primitive: torus; radius: 0.75; radiusTubular: 0.03;"
+					position="0 0.05 0"
+					rotation="90 0 0"
+					material="opacity: 0.75; color: gold; metalness: 0.75; emissive: gold; emissiveIntensity: 0.33;"
+				></a-entity>
+
+				<a-entity incense id="incense" visible="false">
+					<a-entity
+						geometry="primitive: cylinder;"
+						scale="0.015 2 0.015"
+						position="0 1.25 0"
+						material="opacity: 0.5; color: brown; emissive: red; emissiveIntensity: 0.25;"
+					></a-entity>
+					<a-entity
+						geometry="primitive: cylinder;"
+						scale="0.015 2 0.015"
+						position="-0.1 1.15 0"
+						rotation="0 0 5"
+						material="opacity: 0.5; color: brown; emissive: red; emissiveIntensity: 0.25;"
+					></a-entity>
+					<a-entity
+						geometry="primitive: cylinder;"
+						scale="0.015 2 0.015"
+						position="0.1 1.15 0"
+						rotation="0 0 -5"
+						material="opacity: 0.5; color: brown; emissive: red; emissiveIntensity: 0.25;"
+					></a-entity>
+					<a-sphere
+						theta-length="90"
+						position="0 1 0"
+						scale="0.8 0.2 0.8"
+						material="side: double; opacity: 0.75; color: slategray; shader: flat;"
+					></a-sphere>
+				</a-entity>
+			</a-entity>
+
+			<!-- camera -->
+			<a-entity camera position="0 3 13"></a-entity>
+		</a-scene>
+	</body>
+</html>
